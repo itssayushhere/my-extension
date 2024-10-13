@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Extension</title>
+  <style>
+    body { width: 200px; background-color: black; color: white; }
+    button { margin-top: 20px; width: 100%; background-color: blue; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Paste a link</h2>
+        <input id="link-input"  style="width: 100%;"/>
+        <button id="save-button">Save Link</button>
+        <button id="current-tab-button">Select Current Tab</button>
+        <script src="popup.js"></script>
+    </div>
+    </body>
+</html>
