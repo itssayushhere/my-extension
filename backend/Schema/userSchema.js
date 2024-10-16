@@ -21,7 +21,12 @@ const userSchema = new mongoose.Schema({
     url: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Url' 
-    }]
+    }],
+    tabs: {
+        type: Array,
+        default: ['youtube', 'instagram', 'articles'],
+        required: true // Ensures that tabs are not empty
+    }
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);

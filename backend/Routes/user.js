@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
 
         // Create a JWT token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '2d' });
-        res.status(200).json({ token, name: user.name, username: user.username });
+        res.status(200).json({ token, name: user.name, username: user.username , email:user.email , tabs : user.tabs});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -57,7 +57,7 @@ router.get('/all', async (req, res) => {
 router.get('/details', isAuthenticated, async (req, res) => {
     const userId = req.userId;
     try {
-        const user = await User.findById(userId);
+        const user = await User.findById(userId).populate('url').select('-password').select('-tabs');
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.status(200).json(user);
     } catch (error) {

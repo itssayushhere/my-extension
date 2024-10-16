@@ -6,14 +6,17 @@ import User from '../Schema/userSchema.js';
 const router = express.Router();
 // Create a new URL
 router.post('/', isAuthenticated, async (req, res) => {
-    const { link, nickname, type } = req.body;
-    const userId = req.userId; // Get the userId from the authenticated user
+    const { link, nickname, tab } = req.body;
+    const userId = req.userId; 
     try {
-        const newUrl = new Url({ link, nickname, type });
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const newUrl = new Url({ link, nickname, tab });
         await newUrl.save();
-
-        await User.findByIdAndUpdate(userId, { $push: { url: newUrl._id } });
-
+        user.url.push(newUrl._id);
+        await user.save();
         res.status(201).json(newUrl);
     } catch (error) {
         res.status(400).json({ message: error.message });
